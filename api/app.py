@@ -1,13 +1,15 @@
-
 from config import Config
 from functools import wraps
 import pandas as pd
 import joblib
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 
 app = Flask(__name__)
 app.config.from_object(Config)
+
+CORS(app)
 
 if not app.config.get("API_KEY"):
     raise RuntimeError(
