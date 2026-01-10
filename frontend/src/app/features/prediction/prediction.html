@@ -1,0 +1,111 @@
+<div class="container">
+    <mat-card class="prediction-card">
+        <mat-card-header>
+            <mat-card-title>Titanic Survival Prediction</mat-card-title>
+            <mat-card-subtitle>
+                Enter passenger details to estimate survival probability
+            </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="form-grid">
+                <mat-form-field appearance="outline">
+                    <mat-label>Passenger Class</mat-label>
+                    <mat-select [(ngModel)]="formData.Pclass">
+                        @for( option of passengerClasses; track option.value){
+                        <mat-option [value]="option.value">{{ option.label }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Sex</mat-label>
+                    <mat-select [(ngModel)]="formData.Sex">
+                        @for( option of sexOptions; track option.value){
+                        <mat-option [value]="option.value">{{ option.label }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Title</mat-label>
+                    <mat-select [(ngModel)]="formData.Title">
+                        @for( option of titleOptions; track option.value){
+                        <mat-option [value]="option.value">{{ option.label }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Age</mat-label>
+                    <input matInput type="number" [(ngModel)]="formData.Age" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Fare</mat-label>
+                    <input matInput type="number" [(ngModel)]="formData.Fare" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Embarked</mat-label>
+                    <mat-select [(ngModel)]="formData.Title">
+                        @for( option of embarkedOptions; track option.value){
+                        <mat-option [value]="option.value">{{ option.label }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Family Size</mat-label>
+                    <input matInput type="number" min="1" [(ngModel)]="formData.FamilySize" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Alone?</mat-label>
+                    <mat-select [(ngModel)]="formData.IsAlone">
+                        @for( option of booleanOptions; track option.value){
+                        <mat-option [value]="option.value">{{ option.label }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Has Cabin</mat-label>
+                    <mat-select [(ngModel)]="formData.HasCabin">
+                        @for( option of booleanOptions; track option.value){
+                        <mat-option [value]="option.value">{{ option.label }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="actions">
+                <button mat-raised-button color="primary" (click)="predict()" [disabled]="isLoading()">
+                    Predict Survival
+                </button>
+            </div>
+
+            @if(isLoading()){
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            }
+
+            @if(errorMessage()){
+            <mat-card class="error-card">
+                {{ errorMessage() }}
+            </mat-card>
+            }
+
+            @if(result()){
+            <mat-card class="result-card">
+                <h3>
+                    Result:
+                    <span [class.survived]="result()!.survived === 1" [class.notSurvived]="result()!.survived === 0">
+                        {{ result()!.survived === 1 ? 'Survived' : 'Did Not Survive' }}
+                    </span>
+                </h3>
+                <p>Survival Probability: {{ result()!.survival_probability * 100 | number: '1.2-2' }}%</p>
+            </mat-card>
+            }
+        </mat-card-content>
+    </mat-card>
+</div>
