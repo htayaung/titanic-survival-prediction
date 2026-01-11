@@ -66,7 +66,7 @@ export class PredictionComponent {
         this.isLoading.set(false);
       },
       error: err => {
-        this.errorMessage = err?.error?.error || 'Prediction failed. Please try again.';
+        this.errorMessage.set(err?.error?.error || 'Prediction failed. Please try again.');
         this.isLoading.set(false);
       }
     });
