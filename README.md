@@ -13,3 +13,7 @@ An end-to-end machine learning project that trains a survival prediction model u
 ### Not Survived
 
 ![Sample not survived screenshot](assets/prediction-notsurvived.png)
+
+
+https://github.com/user-attachments/assets/4d9939db-0023-4606-8621-d0abca6cd8a1
+
