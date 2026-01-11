@@ -28,6 +28,10 @@ An end-to-end machine learning project that trains a survival prediction model u
         <td>Raw data file (csv)</td>
     </tr>
     <tr>
+        <td>deployment</td>
+        <td>Deployment notes and instructions</td>
+    </tr>
+    <tr>
         <td>frontend</td>
         <td>Angular project for end-user prediction UI</td>
     </tr>
